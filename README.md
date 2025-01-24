@@ -1,0 +1,1 @@
+# vscode-LLM-File-Companion
