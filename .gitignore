@@ -1,0 +1,16 @@
+out
+dist
+node_modules
+.vscode-test/
+*.vsix
+
+
+node_modules/
+.vscode/
+out/
+.vscode-test/
+*.log
+*.tmp
+.env
+.DS_Store
+out/test/**/*.test.js

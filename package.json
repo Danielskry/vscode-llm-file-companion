@@ -1,0 +1,43 @@
+{
+  "name": "llm-file-companion",
+  "displayName": "LLM File Companion",
+  "description": "Append file(s) or entire directories to a single LLM_doc.txt.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.50.0"
+  },
+  "activationEvents": [
+    "onCommand:extension.appendFileToLLMDoc",
+    "onCommand:extension.openLLMDoc"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.appendFileToLLMDoc",
+        "title": "Append file/directory to LLM Document"
+      },
+      {
+        "command": "extension.openLLMDoc",
+        "title": "Open LLM Document"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "extension.appendFileToLLMDoc",
+          "group": "navigation@999"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.3.1",
+    "@types/vscode": "^1.64.0",
+    "typescript": "^5.1.3"
+  }
+}
