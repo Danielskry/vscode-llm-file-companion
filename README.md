@@ -1,5 +1,9 @@
 # vscode-llm-file-companion
 
+
+[![VS Marketplace Version](https://badgen.net/vs-marketplace/v/Danielskry.llm-file-companion)](https://marketplace.visualstudio.com/items?itemName=Danielskry.llm-file-companion)
+[![VS Marketplace Installs](https://badgen.net/vs-marketplace/i/Danielskry.llm-file-companion)](https://marketplace.visualstudio.com/items?itemName=Danielskry.llm-file-companion)
+
 **vscode-llm-file-companion** is a Visual Studio Code extension that simplifies aggregating file contents into a single document for use with large language models (LLMs). It collects text-based files (like `.py`, `.md`, `.js`, `.html`, `.java`, etc.) along with metadata from your workspace and appends them into an `LLM_doc.txt` file. The extension automatically skips binary or non-readable files.
 
 ---
