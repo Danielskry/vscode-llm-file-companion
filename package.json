@@ -2,7 +2,7 @@
   "name": "llm-file-companion",
   "displayName": "LLM File Companion",
   "description": "Append file(s) or entire directories to a single LLM_doc.txt.",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "publisher": "Danielskry",
   "icon": "icon.png",
   "engines": {
@@ -14,7 +14,8 @@
   },
   "activationEvents": [
     "onCommand:extension.appendFileToLLMDoc",
-    "onCommand:extension.openLLMDoc"
+    "onCommand:extension.openLLMDoc",
+    "onCommand:extension.refreshLLMDocOverview"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -26,6 +27,10 @@
       {
         "command": "extension.openLLMDoc",
         "title": "Open LLM Document"
+      },
+      {
+        "command": "extension.refreshLLMDocOverview",
+        "title": "Refresh LLM Document Overview"
       }
     ],
     "menus": {
@@ -35,6 +40,76 @@
           "group": "navigation@999"
         }
       ]
+    },
+    "configuration": {
+      "title": "LLM File Companion",
+      "properties": {
+        "llmFileCompanion.output.filePath": {
+          "type": "string",
+          "default": "LLM_doc.txt",
+          "description": "Relative (or absolute) path of the document the extension appends to."
+        },
+        "llmFileCompanion.projectOverview.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Prepend a project overview block (metadata and/or tree) to LLM_doc.txt."
+        },
+        "llmFileCompanion.projectOverview.includeMetadata": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include workspace metadata (name, path, counts, timestamp) in the overview block."
+        },
+        "llmFileCompanion.projectOverview.includeTree": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include the project tree illustration inside the overview block."
+        },
+        "llmFileCompanion.projectOverview.treeMaxDepth": {
+          "type": "number",
+          "default": 3,
+          "minimum": 0,
+          "description": "Maximum depth for the project tree (0 = unlimited)."
+        },
+        "llmFileCompanion.projectOverview.treeMaxEntriesPerDirectory": {
+          "type": "number",
+          "default": 30,
+          "minimum": 0,
+          "description": "Maximum number of entries listed per directory before collapsing into a summary line (0 = unlimited)."
+        },
+        "llmFileCompanion.projectOverview.template": {
+          "type": "string",
+          "default": "full",
+          "enum": [
+            "full",
+            "metadataOnly",
+            "treeOnly",
+            "summary"
+          ],
+          "description": "Controls the style of the project overview header (full, metadata-only, tree-only, or summary with extension stats)."
+        },
+        "llmFileCompanion.projectOverview.excludedNames": {
+          "type": "array",
+          "description": "Folder or file names (supports * wildcards) to exclude from the project tree.",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "node_modules",
+            ".git",
+            ".vscode",
+            "out",
+            ".venv",
+            "dist",
+            "build",
+            "__pycache__",
+            ".idea",
+            ".cache",
+            ".next",
+            ".turbo",
+            ".DS_Store"
+          ]
+        }
+      }
     }
   },
   "scripts": {
@@ -45,5 +120,8 @@
     "@types/node": "^20.3.1",
     "@types/vscode": "^1.64.0",
     "typescript": "^5.1.3"
+  },
+  "dependencies": {
+    "ignore": "^7.0.5"
   }
 }
